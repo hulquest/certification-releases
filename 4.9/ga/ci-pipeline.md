@@ -118,22 +118,27 @@ oc project <my-project-name> # switch into the project
 > *This kubeconfig will be used to deploy the Operator under test and run the certification checks.*
 
 ### <a id="step5"></a>Step 5 - Import Red Hat Catalogs
+The following commands require a version of OpenShift.  
+The current values are:
+
+* v4.8
+* v4.9
+
 ```bash
+export OC_VERSION="v4.8"
 oc import-image certified-operator-index \
-  --from=registry.redhat.io/redhat/certified-operator-index \
+  --from=registry.redhat.io/redhat/certified-operator-index:${OC_VERSION} \
   --reference-policy local \
   --scheduled \
-  --confirm \
-  --all
+  --confirm 
 ```
 
 ```bash
 oc import-image redhat-marketplace-index \
-  --from=registry.redhat.io/redhat/redhat-marketplace-index \
+  --from=registry.redhat.io/redhat/redhat-marketplace-index:${OC_VERSION} \
   --reference-policy local \
   --scheduled \
-  --confirm \
-  --all
+  --confirm 
 ```
 
 ### <a id="step6"></a>Step 6 - Install the Certification Pipeline and dependencies into the cluster
